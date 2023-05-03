@@ -335,7 +335,7 @@ class PDFReport extends StatelessWidget {
                                         padding: const EdgeInsets.only(
                                             top: 3.5),
                                         child: Text(
-                                          firstField = myController1.text,
+                                          firstField = myController6.text,
                                           textAlign: TextAlign.center,
                                         ),
                                       ),

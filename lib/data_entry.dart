@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:itcp1/date_picker.dart';
-import 'package:itcp1/printing_pdf_report.dart';
+import 'package:itcp1/pdf_report.dart';
+import 'package:itcp1/time_picker.dart';
 
 
 class MyCustomForm extends StatefulWidget {
@@ -148,13 +149,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
               const SizedBox(
                 height: 10,
               ),
-              TextField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'وقت التبليغ بالعارض',
-                ),
-                controller: myController1,
-              ),
+              TimePicker(myController6: myController6,),
               const SizedBox(
                 height: 10,
               ),
@@ -162,8 +157,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'مدة اصلاح العارض',
+                  labelText: 'مدة اصلاح العارض',
                 ),
-                controller: myController1,
+                controller: myController7,
               ),
               const SizedBox(
                 height: 10,
