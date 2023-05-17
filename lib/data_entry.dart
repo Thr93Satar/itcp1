@@ -11,12 +11,7 @@ class MyCustomForm extends StatefulWidget {
   State<MyCustomForm> createState() => _MyCustomFormState();
 }
 
-// Define a corresponding State class.
-// This class holds the data related to the Form.
 class _MyCustomFormState extends State<MyCustomForm> {
-  // Create a text controller and use it to retrieve the current value
-  // of the TextField.
-  // Generating RNG for Report Id. field //
 
   static const _chars = '1234567890';
   final Random _rnd = Random();
@@ -37,11 +32,18 @@ class _MyCustomFormState extends State<MyCustomForm> {
   final TextEditingController myController12 = TextEditingController();
   final TextEditingController myController13 = TextEditingController();
   final TextEditingController myController14 = TextEditingController();
+  final TextEditingController myController15 = TextEditingController();
+  final TextEditingController myController16 = TextEditingController();
+  final TextEditingController myController17 = TextEditingController();
+  final TextEditingController myController18 = TextEditingController();
+  final TextEditingController myController19 = TextEditingController();
   String firstField = "";
 
   Set<String> checkedItems = {};
 
   Set<String> checkedItems1 = {};
+
+  final List<String> myList = [];
 
   final List<String> _items = [
     'سنان يونس حمد',
@@ -61,7 +63,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
     'حسن صالح بكدش',
     'لطيف توني عباس'
   ];
-
   int selectedCount = 0;
 
   @override
@@ -198,8 +199,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Text(
                       'المواد المستخدمة لاصلاح العارض',
                       textAlign: TextAlign.left,
@@ -232,21 +233,21 @@ class _MyCustomFormState extends State<MyCustomForm> {
                           contentPadding: EdgeInsets.all(10.0),
                           hintText: '1',
                         ),
-                        controller: myController8,
+                        controller: myController10,
                       ),
                       TextField(
                         decoration: const InputDecoration(
                           contentPadding: EdgeInsets.all(10.0),
                           hintText: '2',
                         ),
-                        controller: myController9,
+                        controller: myController11,
                       ),
                       TextField(
                         decoration: const InputDecoration(
                           contentPadding: EdgeInsets.all(10.0),
                           hintText: '3',
                         ),
-                        controller: myController10,
+                        controller: myController12,
                       ),
                       TextField(
                         decoration: const InputDecoration(
@@ -254,7 +255,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                           hintText: '4',
                           border: InputBorder.none,
                         ),
-                        controller: myController11,
+                        controller: myController13,
                       ),
                     ],
                   ),
@@ -272,86 +273,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  children: const [
-                    Text(
-                      'فريق الصيانة',
-                      textAlign: TextAlign.left,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Icon(
-                      Icons.home_repair_service_rounded,
-                      color: Colors.blue,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 680,
-                  width: 360,
-                  child: ListView.separated(
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: _items.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final item = _items[index];
-                        return Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.black38,
-                            ),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 5.0),
-                                child: SizedBox(width: 148, child: Text(item)),
-                              ),
-                              const SizedBox(
-                                width: 105,
-                              ),
-                              SizedBox(
-                                width: 100,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    CheckboxListTile(
-                                        value: checkedItems.contains(item),
-                                        onChanged: (checked) {
-                                          setState(() {
-                                            if (checked!) {
-                                              checkedItems.add(item);
-                                            } else {
-                                              checkedItems.remove(item);
-                                            }
-                                          });
-                                        }),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        // ignore: prefer_const_constructors
-                        return SizedBox(
-                          height: 10,
-                        );
-                      }),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Text(
                       'فريق السواق',
                       textAlign: TextAlign.left,
@@ -425,6 +348,81 @@ class _MyCustomFormState extends State<MyCustomForm> {
                         );
                       }),
                 ),
+                const Row(
+                  children: [
+                    Text(
+                      'فريق الصيانة',
+                      textAlign: TextAlign.left,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(
+                      Icons.home_repair_service_rounded,
+                      color: Colors.blue,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 680,
+                  width: 360,
+                  child: ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: _items.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final item = _items[index];
+                        return Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black38,
+                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 5.0),
+                                child: SizedBox(width: 148, child: Text(item)),
+                              ),
+                              const SizedBox(
+                                width: 105,
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    CheckboxListTile(
+                                        value: checkedItems.contains(item),
+                                        onChanged: (checked) {
+                                          setState(() {
+                                            if (checked!) {
+                                              checkedItems.add(item);
+                                            } else {
+                                              checkedItems.remove(item);
+                                            }
+                                          });
+                                        }),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        // ignore: prefer_const_constructors
+                        return SizedBox(
+                          height: 10,
+                        );
+                      }),
+                ),
               ],
             ),
           ),
@@ -437,71 +435,77 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 child: MaterialButton(
                   onPressed: () {
                     setState(() {
-                      if (checkedItems.isEmpty) {
+                      if (checkedItems.isEmpty && checkedItems1.isEmpty) {
                         showDialog(
                             context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Text(
-                                      'خطأ',
-                                      style: TextStyle(
-                                          textBaseline:
-                                              TextBaseline.alphabetic),
+                            builder: (BuildContext context) =>
+                                const AlertDialog(
+                                    title: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'خطأ',
+                                          style: TextStyle(
+                                              textBaseline:
+                                                  TextBaseline.alphabetic),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Icon(
+                                          Icons.error,
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Icon(
-                                      Icons.error,
-                                    ),
-                                  ],
-                                ),
-                                contentPadding: const EdgeInsets.all(10),
-                                content: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 10.0),
-                                      child: Text(
-                                          'يرجى اختيار ما لا يقل عن 4 اعضاء'),
-                                    ),
-                                  ],
-                                )));
-                      } else if (checkedItems.length > 4) {
+                                    contentPadding: EdgeInsets.all(10),
+                                    content: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 10.0),
+                                          child: Text(
+                                              'يرجى اختيار ما لا يقل عن 5 اعضاء'),
+                                        ),
+                                      ],
+                                    )));
+                      } else if (checkedItems.length > 5 && checkedItems1.length > 1) {
                         showDialog(
                             context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Text(
-                                      'خطأ',
-                                      style: TextStyle(
-                                          textBaseline:
-                                              TextBaseline.alphabetic),
+                            builder: (BuildContext context) =>
+                                const AlertDialog(
+                                    title: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'خطأ',
+                                          style: TextStyle(
+                                              textBaseline:
+                                                  TextBaseline.alphabetic),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Icon(
+                                          Icons.error,
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Icon(
-                                      Icons.error,
-                                    ),
-                                  ],
-                                ),
-                                contentPadding: const EdgeInsets.all(10),
-                                content: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 10.0),
-                                      child: Text(
-                                          'الرجاء اختيار ما لا يزيد عن 4 اعضاء'),
-                                    ),
-                                  ],
-                                )));
-                      } else if (checkedItems.length == 1) {
+                                    contentPadding: EdgeInsets.all(10),
+                                    content: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 10.0),
+                                          child: Text(
+                                              'الرجاء اختيار ما لا يزيد 6 اعضاء'),
+                                        ),
+                                      ],
+                                    )));
+                      } else if (checkedItems1.length == 1) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -516,17 +520,25 @@ class _MyCustomFormState extends State<MyCustomForm> {
                                       myController8: myController8,
                                       myController9: myController9,
                                       myController10: myController10,
+                                      myController11: myController11,
                                       myController12: myController12,
+                                      myController13: myController13,
+                                      myController14: myController14,
+                                      myController15: myController15,
+                                      myController16: myController16,
+                                      myController17: myController17,
+                                      myController18: myController18,
+                                      myController19: myController19,
                                       checkedItems: checkedItems,
                                       checkedItems1: checkedItems1,
-                                      item: _items,
+                                  myList: myList,
                                     )));
                       }
                     });
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         'تكوين تقرير الصيانة',
                         style: TextStyle(fontSize: 18, color: Colors.white),
@@ -549,3 +561,4 @@ class _MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
+

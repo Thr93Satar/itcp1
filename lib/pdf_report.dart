@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:itcp1/pdf_previwer.dart';
+import 'package:screenshot/screenshot.dart';
 
 class PDFReport extends StatelessWidget {
   static const _chars = '1234567890';
@@ -21,11 +23,18 @@ class PDFReport extends StatelessWidget {
   final TextEditingController myController8;
   final TextEditingController myController9;
   final TextEditingController myController10;
+  final TextEditingController myController11;
   final TextEditingController myController12;
+  final TextEditingController myController13;
+  final TextEditingController myController14;
+  final TextEditingController myController15;
+  final TextEditingController myController16;
+  final TextEditingController myController17;
+  final TextEditingController myController18;
+  final TextEditingController myController19;
 
-  String firstField = "";
+  final String firstField = "";
 
-  // ignore: use_key_in_widget_constructors
   PDFReport({
     required this.myController1,
     required this.myController2,
@@ -37,22 +46,31 @@ class PDFReport extends StatelessWidget {
     required this.myController8,
     required this.myController9,
     required this.myController10,
-    required this.checkedItems,
-    required this.checkedItems1,
-    required this.item,
     required this.myController12,
-    this.item1,
+    required this.myController13,
+    required this.myController14,
+    required this.myController15,
+    required this.myController16,
+    required this.myController17,
+    required this.myController18,
+    required this.myController19,
+    required this.myController11,
+    required this.checkedItems,
+    required this.checkedItems1, required List<String> myList,
   });
-  final item;
-  final item1;
+
+  final ScreenshotController screenshotController = ScreenshotController();
 
   @override
   Widget build(BuildContext context) {
+
+    List<String> myList = checkedItems.map((element) => element.toString()).toList();
+
     return Scaffold(
         appBar: AppBar(
-          title: Row(
+          title: const Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 Text(
                   'تقرير الصيانة',
                   style: TextStyle(textBaseline: TextBaseline.alphabetic),
@@ -73,491 +91,658 @@ class PDFReport extends StatelessWidget {
               icon: const Icon(Icons.arrow_back_rounded)),
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black)),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 1,
-                      child: Container(
-                    decoration: const BoxDecoration(
-                        border:
-                            Border(bottom: BorderSide(color: Colors.black))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Flexible(
-                          flex: 1,
-                          child: Text(
-                            'مديرية اتصالات ومعلوماتية نينوى',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: Image.asset(
-                            'assets/images/WhatsApp Image 2023-05-09 at 10.11.24 AM.jpeg',
-                            width: 80,
-                            height: 80,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Flexible(
-                          flex: 1,
-                          child: Text(
-                            ' قسم البنى التحتية \n شعبة تراسل المعلومات',
-                            textAlign: TextAlign.center,
-                            maxLines: 3,
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  )),
-                  Expanded(
-                    flex: 3,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                color: Colors.lightBlue,
-                                border: Border(
-                                    bottom: BorderSide(color: Colors.black))),
-                            child: Row(
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 5.0),
-                                  child: Text(
-                                    'معلومات العارضة :',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.white),
+          child: AspectRatio(
+            aspectRatio: 1 / 3,
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(),
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                        flex: 5,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(color: Colors.black))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Flexible(
+                                flex: 2,
+                                child: Text(
+                                  'مديرية اتصالات ومعلوماتية نينوى',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Flexible(
+                                flex: 1,
+                                child: Image.asset(
+                                  'assets/images/image.png',
+                                  width: 80,
+                                  height: 80,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Flexible(
+                                flex: 2,
+                                child: Text(
+                                  ' قسم البنى التحتية \n شعبة تراسل المعلومات',
+                                  textAlign: TextAlign.center,
+                                  maxLines: 3,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                )
-                              ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )),
+                    Expanded(
+                      flex: 2,
+                      child: Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(right: 5.0),
+                            child: Text(
+                              "رقم التقرير :",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Colors.black),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(color: Colors.black))),
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: const BoxDecoration(
-                                      border: Border(
-                                          left: BorderSide(color: Colors.black))),
-                                  child: Column(
-                                    children: const [
-                                      Text(
-                                        'موقع العارض',
+                          Padding(
+                            padding: const EdgeInsets.only(right: 5.0),
+                            child: Text(
+                              getRandomString(10),
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.black),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 14,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  color: Colors.lightBlue,
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.black))),
+                              child: const Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 5.0),
+                                    child: Text(
+                                      'معلومات العارضة :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 10,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.black))),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: const BoxDecoration(
+                                        border: Border(
+                                            left: BorderSide(
+                                                color: Colors.black))),
+                                    child: const Column(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            'موقع العارض',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.white,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'اسم المسار',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.white,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'نوع العارض',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.white,
+                                        ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(left: 5.0),
+                                            child: Text(
+                                              'جهة تسبب العارض',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 176,
+                                    decoration: const BoxDecoration(
+                                        border: Border(
+                                            left: BorderSide(
+                                                color: Colors.black))),
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            myController1.text,
+                                          ),
+                                        ),
+                                        const Divider(
+                                          height: 0,
+                                          color: Colors.black,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            myController2.text,
+                                          ),
+                                        ),
+                                        const Divider(
+                                          height: 0,
+                                          color: Colors.black,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            myController3.text,
+                                          ),
+                                        ),
+                                        const Divider(
+                                          height: 0,
+                                          color: Colors.black,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            myController4.text,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 94,
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: 94,
+                                            color: Colors.blue.shade100,
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(5.0),
+                                              child: Text(
+                                                'وقت العارض',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const Divider(
+                                          height: 0,
+                                          color: Colors.black,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            myController5.text,
+                                          ),
+                                        ),
+                                        const Divider(
+                                          height: 0,
+                                          color: Colors.black,
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            width: 94,
+                                            color: Colors.blue.shade100,
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(5.0),
+                                              child: Text(
+                                                'تاريخ العارض',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const Divider(
+                                          height: 0,
+                                          color: Colors.black,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            myController6.text,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.black))),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 50,
+                                    decoration: const BoxDecoration(
+                                        border: Border(
+                                            left: BorderSide(
+                                                color: Colors.black))),
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(5.0),
+                                      child: Text(
+                                        'مدة اصلاح العارض',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            color: Colors.black),
                                       ),
-                                      Divider(color: Colors.white,),
-                                      Text(
-                                        'اسم المسار',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5.0),
+                                    child: Text(
+                                      myController7.text,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  color: Colors.lightBlue,
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.black))),
+                              child: const Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 5.0),
+                                    child: Text(
+                                      'الاجهزة والمواد المستخدمة :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 8,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.black))),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    flex: 5,
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  color: Colors.black))),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 1,
+                                            child: Container(
+                                              height: 100,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.blue.shade100,
+                                                  border: Border(
+                                                      left: BorderSide(
+                                                          color:
+                                                              Colors.black))),
+                                              child: const SizedBox(
+                                                  child: Text(
+                                                'الأجهزة : ',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15),
+                                              )),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 4,
+                                            child: Column(
+                                              children: [
+                                                Expanded(
+                                                    flex: 2,
+                                                    child: Text(
+                                                        myController11.text)),
+                                                Divider(
+                                                  color: Colors.black,
+                                                ),
+                                                Expanded(
+                                                    flex: 2,
+                                                    child: Text(
+                                                        myController12.text)),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      Divider(color: Colors.white,),
-                                      Text(
-                                        'نوع العارض',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 4,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                color: Colors.blue.shade100,
+                                                border: Border(
+                                                    left: BorderSide(
+                                                        color: Colors.black))),
+                                            child: const SizedBox(
+                                                child: Text(
+                                              'المواد :',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15),
+                                            )),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            children: [
+                                              Expanded(
+                                                  flex: 2,
+                                                  child: Text(
+                                                      myController13.text)),
+                                              Divider(
+                                                color: Colors.black,
+                                              ),
+                                              Expanded(
+                                                  flex: 2,
+                                                  child: Text(
+                                                      myController14.text)),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 8,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  color: Colors.lightBlue,
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.black))),
+                              child: const Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 5.0),
+                                    child: Text(
+                                      'تفاصيل العمل على العارضة :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 6,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.black))),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Container(
+                                      decoration:
+                                          BoxDecoration(border: Border.all()),
+                                      child: Text(
+                                        myController15.text,
+                                        style: TextStyle(fontSize: 13),
                                       ),
-                                      Divider(color: Colors.white,),
-                                      Text(
-                                        'جهة تسبب العارض',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: Colors.lightBlue,
+                              ),
+                              child: const Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 5.0),
+                                    child: Text(
+                                      'فريق السواق :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.black))),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all()),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Text(
+                                              checkedItems1
+                                                  .elementAt(0)
+                                                  .toString(),
+                                              style: TextStyle(fontSize: 13),
+                                            ),
+                                          ),
+                                        ),
                                       )
                                     ],
                                   ),
-                                ),
-                                Container(
-                                  width: 181,
-                                  decoration: const BoxDecoration(
-                                      border: Border(
-                                          left: BorderSide(color: Colors.black))),
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Text(
-                                          myController1.text,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      const Divider(
-                                        height: 0,
-                                        color: Colors.black,),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Text(
-                                          myController2.text,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      const Divider(
-                                        height: 0,
-                                        color: Colors.black,),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Text(
-                                          myController3.text,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      const Divider(
-                                        height: 0,
-                                        color: Colors.black,),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Text(
-                                          myController4.text,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 94,
-                                  child: Column(
-                                    children:[
-                                      Expanded(
-                                        flex:1,
-                                        child: Container(
-                                          width: 94,
-                                          color: Colors.blue.shade100,
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Text(
-                                              'وقت العارض',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const Divider(
-                                        height: 0,
-                                        color: Colors.black,),
-                                      Expanded(
-                                        flex:1,
-                                        child: Text(
-                                          myController5.text,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      const Divider(
-                                        height: 0,
-                                        color: Colors.black,),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          width: 94,
-                                          color: Colors.blue.shade100,
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Text(
-                                              'تاريخ العارض',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const Divider(
-                                        height: 0,
-                                        color: Colors.black,),
-                                      Expanded(
-                                        flex:1,
-                                        child: Text(
-                                          myController6.text,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                color: Colors.lightBlue,
-                                border: Border(
-                                    bottom: BorderSide(color: Colors.black))),
-                            child: Row(
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 5.0),
-                                  child: Text(
-                                    'معلومات العارضة :',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            decoration: const BoxDecoration(
+                    Expanded(
+                      flex: 8,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              decoration: const BoxDecoration(
                                 color: Colors.lightBlue,
-                                border: Border(
-                                    bottom: BorderSide(color: Colors.black))),
-                            child: Row(
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 5.0),
-                                  child: Text(
-                                    'معلومات العارضة :',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.white),
-                                  ),
-                                )
-                              ],
+                              ),
+                              child: const Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 5.0),
+                                    child: Text(
+                                      'فريق الصيانة :',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(color: Colors.black))),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                        border: Border(
-                                            left: BorderSide(color: Colors.black))),
+                          Expanded(
+                            flex: 6,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.black))),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 380,
+                                    height: 200,
                                     child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Column(
-                                        children: const [
-                                          Text(
-                                            'موقع العارض',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            height: 12,
-                                          ),
-                                          Text(
-                                            'اسم المسار',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            height: 12,
-                                          ),
-                                          Text(
-                                            'نوع العارض',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            height: 12,
-                                          ),
-                                          Text(
-                                            'جهة تسبب العارض',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          )
-                                        ],
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: GridView.builder(
+                                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                          mainAxisExtent: 60.0,
+                                          crossAxisCount: 3,
+                                        ),
+                                        itemCount: checkedItems.length, // Number of items in the grid
+                                        itemBuilder: (BuildContext context, int index) {
+                                          final item = myList[index];
+                                          return Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Container(
+                                              width: 50,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(10.0),
+                                                child: Text(item),
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ]
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                color: Colors.lightBlue,
-                                border: Border(
-                                    bottom: BorderSide(color: Colors.black))),
-                            child: Row(
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 5.0),
-                                  child: Text(
-                                    'معلومات العارضة :',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                          )],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                color: Colors.lightBlue,
-                                border: Border(
-                                    bottom: BorderSide(color: Colors.black))),
-                            child: Row(
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 5.0),
-                                  child: Text(
-                                    'معلومات العارضة :',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(color: Colors.black))),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                        border: Border(
-                                            left: BorderSide(color: Colors.black))),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Column(
-                                        children: const [
-                                          Text(
-                                            'موقع العارض',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            height: 12,
-                                          ),
-                                          Text(
-                                            'اسم المسار',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            height: 12,
-                                          ),
-                                          Text(
-                                            'نوع العارض',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            height: 12,
-                                          ),
-                                          Text(
-                                            'جهة تسبب العارض',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                color: Colors.lightBlue,
-                                border: Border(
-                                    bottom: BorderSide(color: Colors.black))),
-                            child: Row(
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 5.0),
-                                  child: Text(
-                                    'معلومات العارضة :',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
-                ],
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PDFView(
+                                      title: myController1.text.toString(),
+                                    )));
+                      },
+                      child: Text('خزن و طباعة'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
