@@ -1,16 +1,33 @@
-import 'dart:io';
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
+Future<Uint8List> generatePdf(
+  PdfPageFormat format,
+  String title,
+  List<String> repairTeam,
+  String driversTeam,
+  String controller1,
+  String controller2,
+  String controller3,
+  String controller4,
+  String controller5,
+  String controller6,
+  String controller7,
+  String controller8,
+  String controller9,
+  String controller10,
+  String controller11,
+  String controller12,
+) async {
   final pdf = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
   final arabicFont = await rootBundle.load('fonts/Amiri-Regular.ttf');
   final ttf = pw.Font.ttf(arabicFont);
   final image = pw.MemoryImage(
     (await rootBundle.load('assets/images/image.png')).buffer.asUint8List(),
   );
+  final count = repairTeam.length;
 
   pdf.addPage(
     pw.Page(
@@ -55,8 +72,8 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                               flex: 1,
                               child: pw.Image(
                                 image,
-                                width: 80,
-                                height: 80,
+                                width: 50,
+                                height: 50,
                               ),
                             ),
                             pw.SizedBox(
@@ -136,7 +153,6 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                     child: pw.Container(
                       decoration: const pw.BoxDecoration(
                           border: pw.Border(
-                              top: pw.BorderSide(color: PdfColors.black),
                               bottom: pw.BorderSide(color: PdfColors.black))),
                       child: pw.Row(
                         children: [
@@ -149,7 +165,7 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                     width: 94,
                                     color: PdfColors.blue,
                                     child: pw.Padding(
-                                      padding: const pw.EdgeInsets.all(20),
+                                      padding: const pw.EdgeInsets.all(10),
                                       child: pw.Text(
                                         'وقت العارض',
                                         textDirection: pw.TextDirection.rtl,
@@ -168,7 +184,7 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                 ),
                                 pw.Expanded(
                                   child: pw.Text(
-                                    title,
+                                    controller5,
                                   ),
                                 ),
                                 pw.Divider(
@@ -180,7 +196,7 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                     width: 94,
                                     color: PdfColors.blue,
                                     child: pw.Padding(
-                                      padding: const pw.EdgeInsets.all(20.0),
+                                      padding: const pw.EdgeInsets.all(10.0),
                                       child: pw.Text(
                                         'تاريخ العارض',
                                         textDirection: pw.TextDirection.rtl,
@@ -198,9 +214,9 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                   color: PdfColors.black,
                                 ),
                                 pw.Expanded(
-                                  child: pw.Text(
-                                    title,
-                                  ),
+                                  child: pw.Text(controller6,
+                                      textDirection: pw.TextDirection.rtl,
+                                      style: pw.TextStyle(font: ttf)),
                                 ),
                               ],
                             ),
@@ -214,36 +230,36 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                             child: pw.Column(
                               children: [
                                 pw.Expanded(
-                                  child: pw.Text(
-                                    title,
-                                  ),
+                                  child: pw.Text(controller1,
+                                      textDirection: pw.TextDirection.rtl,
+                                      style: pw.TextStyle(font: ttf)),
                                 ),
                                 pw.Divider(
                                   height: 0,
                                   color: PdfColors.black,
                                 ),
                                 pw.Expanded(
-                                  child: pw.Text(
-                                    title,
-                                  ),
+                                  child: pw.Text(controller2,
+                                      textDirection: pw.TextDirection.rtl,
+                                      style: pw.TextStyle(font: ttf)),
                                 ),
                                 pw.Divider(
                                   height: 0,
                                   color: PdfColors.black,
                                 ),
                                 pw.Expanded(
-                                  child: pw.Text(
-                                    title,
-                                  ),
+                                  child: pw.Text(controller3,
+                                      textDirection: pw.TextDirection.rtl,
+                                      style: pw.TextStyle(font: ttf)),
                                 ),
                                 pw.Divider(
                                   height: 0,
                                   color: PdfColors.black,
                                 ),
                                 pw.Expanded(
-                                  child: pw.Text(
-                                    title,
-                                  ),
+                                  child: pw.Text(controller4,
+                                      textDirection: pw.TextDirection.rtl,
+                                      style: pw.TextStyle(font: ttf)),
                                 ),
                               ],
                             ),
@@ -328,6 +344,11 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                       child: pw.Row(
                         mainAxisAlignment: pw.MainAxisAlignment.end,
                         children: [
+                          pw.Padding(
+                              padding: const pw.EdgeInsets.only(left: 5.0),
+                              child: pw.Text(controller7,
+                                  textDirection: pw.TextDirection.rtl,
+                                  style: pw.TextStyle(font: ttf))),
                           pw.Container(
                             height: 50,
                             decoration: const pw.BoxDecoration(
@@ -335,7 +356,7 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                     left:
                                         pw.BorderSide(color: PdfColors.black))),
                             child: pw.Padding(
-                              padding: const pw.EdgeInsets.all(5.0),
+                              padding: const pw.EdgeInsets.only(right: 10.0),
                               child: pw.Text(
                                 'مدة اصلاح العارض',
                                 textDirection: pw.TextDirection.rtl,
@@ -345,18 +366,8 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                     fontSize: 15,
                                     color: PdfColors.black),
                               ),
-                            ),
                           ),
-                          pw.Padding(
-                            padding: const pw.EdgeInsets.only(left: 5.0),
-                            child: pw.Text(
-                              title,
-                              style: pw.TextStyle(
-                                  fontWeight: pw.FontWeight.bold,
-                                  fontSize: 15,
-                                  color: PdfColors.white),
-                            ),
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -416,17 +427,21 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                             children: [
                                               pw.Expanded(
                                                   flex: 2,
-                                                  child: pw.Text(
-                                                    title,
-                                                  )),
+                                                  child: pw.Text(controller8,
+                                                      textDirection:
+                                                          pw.TextDirection.rtl,
+                                                      style: pw.TextStyle(
+                                                          font: ttf))),
                                               pw.Divider(
                                                 color: PdfColors.black,
                                               ),
                                               pw.Expanded(
                                                   flex: 2,
-                                                  child: pw.Text(
-                                                    title,
-                                                  )),
+                                                  child: pw.Text(controller9,
+                                                      textDirection:
+                                                          pw.TextDirection.rtl,
+                                                      style: pw.TextStyle(
+                                                          font: ttf))),
                                             ],
                                           ),
                                         ),
@@ -446,9 +461,9 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                               textDirection:
                                                   pw.TextDirection.rtl,
                                               style: pw.TextStyle(
-                                                  font: ttf,
-                                                  fontWeight: pw.FontWeight.bold,
-                                                  fontSize: 15,
+                                                font: ttf,
+                                                fontWeight: pw.FontWeight.bold,
+                                                fontSize: 15,
                                                 color: PdfColors.white,
                                               ),
                                             )),
@@ -467,17 +482,22 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                         child: pw.Column(
                                           children: [
                                             pw.Expanded(
-                                              flex: 2,
-                                              child: pw.Text(title),
-                                            ),
+                                                flex: 2,
+                                                child: pw.Text(controller10,
+                                                    textDirection:
+                                                        pw.TextDirection.rtl,
+                                                    style: pw.TextStyle(
+                                                        font: ttf))),
                                             pw.Divider(
                                               color: PdfColors.black,
                                             ),
                                             pw.Expanded(
                                                 flex: 2,
-                                                child: pw.Text(
-                                                  title,
-                                                )),
+                                                child: pw.Text(controller11,
+                                                    textDirection:
+                                                        pw.TextDirection.rtl,
+                                                    style: pw.TextStyle(
+                                                        font: ttf))),
                                           ],
                                         ),
                                       ),
@@ -495,9 +515,9 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                             'المواد :',
                                             textDirection: pw.TextDirection.rtl,
                                             style: pw.TextStyle(
-                                                font: ttf,
-                                                fontWeight: pw.FontWeight.bold,
-                                                fontSize: 15,
+                                              font: ttf,
+                                              fontWeight: pw.FontWeight.bold,
+                                              fontSize: 15,
                                               color: PdfColors.white,
                                             ),
                                           )),
@@ -522,9 +542,7 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                           child: pw.Container(
                             decoration: const pw.BoxDecoration(
                                 color: PdfColors.lightBlue,
-                                border: pw.Border(
-                                    bottom:
-                                        pw.BorderSide(color: PdfColors.black))),
+                             ),
                             child: pw.Row(
                               mainAxisAlignment: pw.MainAxisAlignment.end,
                               children: [
@@ -548,17 +566,77 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                           flex: 6,
                           child: pw.Container(
                             decoration: const pw.BoxDecoration(
+                            ),
+                            child: pw.Padding(
+                                padding: const pw.EdgeInsets.only(left: 5.0),
+                                child: pw.Expanded(
+                                    flex: 6,
+                                    child: pw.Padding(
+                                      padding: const pw.EdgeInsets.all(5),
+                                      child: pw.Text(controller12,
+                                          textDirection: pw.TextDirection.rtl,
+                                          style: pw.TextStyle(font: ttf))
+                                    )
+                                )),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  pw.Expanded(
+                    flex: 5,
+                    child: pw.Column(
+                      children: [
+                        pw.Expanded(
+                          flex: 2,
+                          child: pw.Container(
+                            decoration: const pw.BoxDecoration(
+                                color: PdfColors.lightBlue,
                                 border: pw.Border(
                                     bottom:
                                         pw.BorderSide(color: PdfColors.black))),
                             child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.end,
                               children: [
                                 pw.Padding(
-                                  padding: const pw.EdgeInsets.only(left: 5.0),
-                                  child: pw.Container(
-                                    decoration: const pw.BoxDecoration(),
+                                  padding: const pw.EdgeInsets.only(right: 5.0),
+                                  child: pw.Text(
+                                    'فريق سائقي العجلات :',
+                                    textDirection: pw.TextDirection.rtl,
+                                    style: pw.TextStyle(
+                                        font: ttf,
+                                        fontWeight: pw.FontWeight.bold,
+                                        fontSize: 15,
+                                        color: PdfColors.white),
                                   ),
                                 )
+                              ],
+                            ),
+                          ),
+                        ),
+                        pw.Expanded(
+                          flex: 3,
+                          child: pw.Container(
+                            decoration: const pw.BoxDecoration(
+                                border: pw.Border(
+                                    bottom:
+                                        pw.BorderSide(color: PdfColors.black))),
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.end,
+                              children: [
+                                pw.Padding(
+                                    padding: const pw.EdgeInsets.all(10),
+                                    child: pw.Container(
+                                        height: 80,
+                                        width: 150,
+                                        child: pw.Padding(
+                                          padding: const pw.EdgeInsets.only(
+                                              right: 5),
+                                          child: pw.Text(driversTeam,
+                                              textDirection:
+                                                  pw.TextDirection.rtl,
+                                              style: pw.TextStyle(font: ttf)),
+                                        ))),
                               ],
                             ),
                           ),
@@ -577,14 +655,14 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                                 color: PdfColors.lightBlue,
                                 border: pw.Border(
                                     bottom:
-                                    pw.BorderSide(color: PdfColors.black))),
+                                        pw.BorderSide(color: PdfColors.black))),
                             child: pw.Row(
                               mainAxisAlignment: pw.MainAxisAlignment.end,
                               children: [
                                 pw.Padding(
                                   padding: const pw.EdgeInsets.only(right: 5.0),
                                   child: pw.Text(
-                                    'تفاصيل العمل على العارضة :',
+                                    'فريق الصيانة :',
                                     textDirection: pw.TextDirection.rtl,
                                     style: pw.TextStyle(
                                         font: ttf,
@@ -603,68 +681,40 @@ Future<Uint8List> generatePdf(PdfPageFormat format, String title) async {
                             decoration: const pw.BoxDecoration(
                                 border: pw.Border(
                                     bottom:
-                                    pw.BorderSide(color: PdfColors.black))),
-                            child: pw.Row(
-                              children: [
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.only(left: 5.0),
-                                  child: pw.Container(
-                                    decoration: const pw.BoxDecoration(),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  pw.Expanded(
-                    flex: 8,
-                    child: pw.Column(
-                      children: [
-                        pw.Expanded(
-                          flex: 2,
-                          child: pw.Container(
-                            decoration: const pw.BoxDecoration(
-                                color: PdfColors.lightBlue,
-                                border: pw.Border(
-                                    bottom:
-                                    pw.BorderSide(color: PdfColors.black))),
+                                        pw.BorderSide(color: PdfColors.black))),
                             child: pw.Row(
                               mainAxisAlignment: pw.MainAxisAlignment.end,
                               children: [
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.only(right: 5.0),
-                                  child: pw.Text(
-                                    'تفاصيل العمل على العارضة :',
-                                    textDirection: pw.TextDirection.rtl,
-                                    style: pw.TextStyle(
-                                        font: ttf,
-                                        fontWeight: pw.FontWeight.bold,
-                                        fontSize: 15,
-                                        color: PdfColors.white),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        pw.Expanded(
-                          flex: 6,
-                          child: pw.Container(
-                            decoration: const pw.BoxDecoration(
-                                border: pw.Border(
-                                    bottom:
-                                    pw.BorderSide(color: PdfColors.black))),
-                            child: pw.Row(
-                              children: [
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.only(left: 5.0),
-                                  child: pw.Container(
-                                    decoration: const pw.BoxDecoration(),
-                                  ),
-                                )
+                                pw.Container(
+                                    height: 300,
+                                    width: 350,
+                                    child: pw.Padding(
+                                        padding: const pw.EdgeInsets.all(10.0),
+                                        child: pw.GridView(
+                                            crossAxisCount: 3,
+                                            children: List.generate(
+                                              count,
+                                              (index) {
+                                                return pw.Padding(
+                                                  padding: pw.EdgeInsets.all(5),
+                                                  child: pw.Container(
+                                                      height: 50,
+                                                      width: 50,
+                                                      child: pw.Padding(
+                                                          padding: pw.EdgeInsets
+                                                              .only(right: 5),
+                                                          child: pw.Text(
+                                                              repairTeam[index],
+                                                              textDirection: pw
+                                                                  .TextDirection
+                                                                  .rtl,
+                                                              style:
+                                                                  pw.TextStyle(
+                                                                font: ttf,
+                                                              )))),
+                                                );
+                                              },
+                                            ))))
                               ],
                             ),
                           ),

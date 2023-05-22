@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:itcp1/date_picker.dart';
 import 'package:itcp1/pdf_report.dart';
 import 'package:itcp1/time_picker.dart';
+import 'defects_class.dart';
 
 class MyCustomForm extends StatefulWidget {
   const MyCustomForm({super.key});
@@ -13,10 +14,15 @@ class MyCustomForm extends StatefulWidget {
 
 class _MyCustomFormState extends State<MyCustomForm> {
 
+
+  Defects? selectedDefects;
+
+  // --------------------------------------------RNG--------------------------------------
   static const _chars = '1234567890';
   final Random _rnd = Random();
   String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+  // -----------------------------------------------RNG--------------------------------------
 
   final TextEditingController myController1 = TextEditingController();
   final TextEditingController myController2 = TextEditingController();
@@ -30,13 +36,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
   final TextEditingController myController10 = TextEditingController();
   final TextEditingController myController11 = TextEditingController();
   final TextEditingController myController12 = TextEditingController();
-  final TextEditingController myController13 = TextEditingController();
-  final TextEditingController myController14 = TextEditingController();
-  final TextEditingController myController15 = TextEditingController();
-  final TextEditingController myController16 = TextEditingController();
-  final TextEditingController myController17 = TextEditingController();
-  final TextEditingController myController18 = TextEditingController();
-  final TextEditingController myController19 = TextEditingController();
   String firstField = "";
 
   Set<String> checkedItems = {};
@@ -67,6 +66,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
 
   @override
   Widget build(BuildContext context) {
+    final List<DropdownMenuEntry<Defects>> defectsEntries = <DropdownMenuEntry<Defects>>[];
+    for (final Defects defects in Defects.values) {
+      defectsEntries.add(DropdownMenuEntry<Defects>(value: defects, label: defects.label.toString()),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text("تقرير الصيانة - ITCP"),
@@ -95,6 +99,10 @@ class _MyCustomFormState extends State<MyCustomForm> {
       body: SingleChildScrollView(
         child: Column(children: [
           Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Image.asset('assets/images/image.png', height: 150,width: 150,),
+          ),
+          Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -111,6 +119,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     SizedBox(
                       width: 150,
@@ -160,19 +169,33 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 const SizedBox(
                   height: 10,
                 ),
-                SizedBox(
-                  height: 50,
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      border: OutlineInputBorder(),
-                      hintText: 'جهة تسبب العارض',
-                    ),
-                    controller: myController4,
-                  ),
+                DropdownMenu<Defects>(
+                  width: 363.5,
+                  dropdownMenuEntries: defectsEntries,
+                  controller: myController4,
+                  label: Text('جهة تسبب العارض'),
+                  onSelected: (Defects? defects) {
+                    setState(() {
+                      if(defects == Defects.def8)
+                      {
+                        showDialog(context: context, builder: (BuildContext context)=>
+                            AlertDialog(
+                              content: TextFormField(
+                                controller: myController4,
+                              ),
+                            )
+                        );
+                      }
+                      else
+                        {
+                          selectedDefects = defects;
+                        }
+                    }
+                    );
+                  },
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 DateTextField(myController5: myController5),
                 const SizedBox(
@@ -233,21 +256,21 @@ class _MyCustomFormState extends State<MyCustomForm> {
                           contentPadding: EdgeInsets.all(10.0),
                           hintText: '1',
                         ),
-                        controller: myController10,
+                        controller: myController8,
                       ),
                       TextField(
                         decoration: const InputDecoration(
                           contentPadding: EdgeInsets.all(10.0),
                           hintText: '2',
                         ),
-                        controller: myController11,
+                        controller: myController9,
                       ),
                       TextField(
                         decoration: const InputDecoration(
                           contentPadding: EdgeInsets.all(10.0),
                           hintText: '3',
                         ),
-                        controller: myController12,
+                        controller: myController10,
                       ),
                       TextField(
                         decoration: const InputDecoration(
@@ -255,7 +278,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                           hintText: '4',
                           border: InputBorder.none,
                         ),
-                        controller: myController13,
+                        controller: myController11,
                       ),
                     ],
                   ),
@@ -470,7 +493,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
                                         ),
                                       ],
                                     )));
-                      } else if (checkedItems.length > 5 && checkedItems1.length > 1) {
+                      } else if (checkedItems.length > 5 &&
+                          checkedItems1.length > 1) {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) =>
@@ -522,16 +546,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
                                       myController10: myController10,
                                       myController11: myController11,
                                       myController12: myController12,
-                                      myController13: myController13,
-                                      myController14: myController14,
-                                      myController15: myController15,
-                                      myController16: myController16,
-                                      myController17: myController17,
-                                      myController18: myController18,
-                                      myController19: myController19,
                                       checkedItems: checkedItems,
                                       checkedItems1: checkedItems1,
-                                  myList: myList,
+                                      myList: myList,
                                     )));
                       }
                     });

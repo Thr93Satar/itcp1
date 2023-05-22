@@ -25,13 +25,7 @@ class PDFReport extends StatelessWidget {
   final TextEditingController myController10;
   final TextEditingController myController11;
   final TextEditingController myController12;
-  final TextEditingController myController13;
-  final TextEditingController myController14;
-  final TextEditingController myController15;
-  final TextEditingController myController16;
-  final TextEditingController myController17;
-  final TextEditingController myController18;
-  final TextEditingController myController19;
+
 
   final String firstField = "";
 
@@ -47,16 +41,10 @@ class PDFReport extends StatelessWidget {
     required this.myController9,
     required this.myController10,
     required this.myController12,
-    required this.myController13,
-    required this.myController14,
-    required this.myController15,
-    required this.myController16,
-    required this.myController17,
-    required this.myController18,
-    required this.myController19,
     required this.myController11,
     required this.checkedItems,
-    required this.checkedItems1, required List<String> myList,
+    required this.checkedItems1,
+    required List<String> myList,
   });
 
   final ScreenshotController screenshotController = ScreenshotController();
@@ -391,14 +379,8 @@ class PDFReport extends StatelessWidget {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 5.0),
-                                    child: Text(
-                                      myController7.text,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: Colors.white),
-                                    ),
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Text(myController7.text),
                                   ),
                                 ],
                               ),
@@ -457,7 +439,7 @@ class PDFReport extends StatelessWidget {
                                               height: 100,
                                               decoration: BoxDecoration(
                                                   color: Colors.blue.shade100,
-                                                  border: Border(
+                                                  border: const Border(
                                                       left: BorderSide(
                                                           color:
                                                               Colors.black))),
@@ -477,14 +459,14 @@ class PDFReport extends StatelessWidget {
                                                 Expanded(
                                                     flex: 2,
                                                     child: Text(
-                                                        myController11.text)),
-                                                Divider(
+                                                        myController8.text)),
+                                                const Divider(
                                                   color: Colors.black,
                                                 ),
                                                 Expanded(
                                                     flex: 2,
                                                     child: Text(
-                                                        myController12.text)),
+                                                        myController9.text)),
                                               ],
                                             ),
                                           ),
@@ -502,7 +484,7 @@ class PDFReport extends StatelessWidget {
                                             height: 100,
                                             decoration: BoxDecoration(
                                                 color: Colors.blue.shade100,
-                                                border: Border(
+                                                border: const Border(
                                                     left: BorderSide(
                                                         color: Colors.black))),
                                             child: const SizedBox(
@@ -521,14 +503,14 @@ class PDFReport extends StatelessWidget {
                                               Expanded(
                                                   flex: 2,
                                                   child: Text(
-                                                      myController13.text)),
-                                              Divider(
+                                                      myController10.text)),
+                                              const Divider(
                                                 color: Colors.black,
                                               ),
                                               Expanded(
                                                   flex: 2,
                                                   child: Text(
-                                                      myController14.text)),
+                                                      myController11.text)),
                                             ],
                                           ),
                                         ),
@@ -551,8 +533,7 @@ class PDFReport extends StatelessWidget {
                             child: Container(
                               decoration: const BoxDecoration(
                                   color: Colors.lightBlue,
-                                  border: Border(
-                                      bottom: BorderSide(color: Colors.black))),
+                                  ),
                               child: const Row(
                                 children: [
                                   Padding(
@@ -571,24 +552,13 @@ class PDFReport extends StatelessWidget {
                           ),
                           Expanded(
                             flex: 6,
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(color: Colors.black))),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      decoration:
-                                          BoxDecoration(border: Border.all()),
-                                      child: Text(
-                                        myController15.text,
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                    ),
-                                  )
-                                ],
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                myController12.text,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 5,
+                                style: const TextStyle(fontSize: 13),
                               ),
                             ),
                           ),
@@ -642,7 +612,7 @@ class PDFReport extends StatelessWidget {
                                               checkedItems1
                                                   .elementAt(0)
                                                   .toString(),
-                                              style: TextStyle(fontSize: 13),
+                                              style: const TextStyle(fontSize: 13),
                                             ),
                                           ),
                                         ),
@@ -707,13 +677,14 @@ class PDFReport extends StatelessWidget {
                                           return Padding(
                                             padding: const EdgeInsets.all(5.0),
                                             child: Container(
-                                              width: 50,
+                                              width: 40,
+                                              height: 30,
                                               decoration: BoxDecoration(
                                                 border: Border.all(),
                                               ),
                                               child: Padding(
                                                 padding: const EdgeInsets.all(10.0),
-                                                child: Text(item),
+                                                child: Text(item,style: const TextStyle(fontSize: 13),),
                                               ),
                                             ),
                                           );
@@ -736,10 +707,24 @@ class PDFReport extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => PDFView(
-                                      title: myController1.text.toString(),
+                                      title: 'Pdf Page',
+                                  repairTeam: myList,
+                                  controller1: myController1.text,
+                                  controller2: myController2.text,
+                                  controller3: myController3.text,
+                                  controller4: myController4.text,
+                                  controller5: myController5.text,
+                                  controller6: myController6.text,
+                                  controller7: myController7.text,
+                                  controller8: myController8.text,
+                                  controller9: myController9.text,
+                                  controller10: myController10.text,
+                                  controller11: myController11.text,
+                                  controller12: myController12.text,
+                                  driversTeam: checkedItems1.elementAt(0),
                                     )));
                       },
-                      child: Text('خزن و طباعة'),
+                      child: const Text('خزن و طباعة'),
                     ),
                   ],
                 ),
